@@ -1,0 +1,223 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #2a244d transparent;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(135deg, #05040a 0%, #110e1f 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container {
+    display: flex;
+    width: 100%;
+    height: 98%;
+    max-width: 1200px;
+    background-color: rgba(21, 18, 38, 0.6);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.15);
+    border: 1px solid rgba(138, 43, 226, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.sidebar {
+    width: 300px;
+    background-color: #0c091a;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid rgba(138, 43, 226, 0.2);
+}
+
+.sidebar h2 {
+    padding: 20px;
+    font-size: 1.6rem;
+    color: #e6e4f0;
+    border-bottom: 1px solid #2a244d;
+}
+
+.searchbar {
+    padding: 10px 5px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: rgba(26, 21, 46, 0.8); 
+    border-bottom: 1px solid rgba(138, 43, 226, 0.15);
+}
+
+.searchbar input {
+    width: 100%;
+    padding: 10px 15px;
+    border: solid 1px #2a244d;
+    border-radius: 20px;
+    font-size: 0.9rem;  
+    background-color: #0a0812;
+    color: #ffffff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.contacts-list {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.contacts-list ul {
+    list-style: none;
+}
+
+.contact {
+    padding: 15px 20px;
+    border-bottom: solid 1px #2a244d;
+    cursor:pointer;
+    transition: background-color 0.2s ease;
+    color: #b8b3d6;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    border-bottom-right-radius: 5px;
+    
+}
+
+.contact:hover {
+    background: linear-gradient(90deg, rgba(138, 43, 226, 0.15) 0%, transparent 100%);
+    color: #ffffff;
+    border-left: 3px solid #8A2BE2;
+}
+
+.chat-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background: 
+        linear-gradient(rgba(10, 8, 18, 0.85), rgba(10, 8, 18, 0.85)), 
+        url("bg-img2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.chat-header {
+    padding: 15px;
+    background-color: #151226;
+    border-bottom: 1px solid #2a244d;
+    align-items: center;
+    display: flex;
+}
+
+.chat-header h2 {
+    font-size: 1.4rem;
+    color: #e6e4f0;
+}
+
+.message-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    gap: 15px;
+}
+
+.my-message, .their-message {
+    max-width: 65%;
+    display: flex;
+    flex-direction: column;
+}
+
+.my-message p, .their-message p{
+    padding: 10px 15px;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    line-height: 1.4;  
+}
+
+.their-message {
+    align-self: flex-start;
+}
+
+.their-message p {
+    background: linear-gradient(135deg, #1f1b36 0%, #151226 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #e6e4f0;
+    border-top-left-radius: 2px;
+}
+
+.my-message {
+    align-self: flex-end;
+}
+
+.my-message p {
+    background: linear-gradient(135deg, #4b1e8f 0%, #291054 100%);
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    box-shadow: 0 4px 15px rgba(75, 30, 143, 0.4);
+    color: #ffffff;
+    border-top-right-radius: 2px;
+}
+
+.input {
+    padding: 15px 20px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.input input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: solid 1px #2a244d;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    background-color: #1b182789;
+    outline: none;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.input button {
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #4169E1 0%, #8A2BE2 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
+}
+
+.input button:hover {
+    background: linear-gradient(135deg, #5c7eea 0%, #9b45e8 100%);
+    box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
+    transform: scale(1.05);
+}
+
+.input input:focus, .searchbar input:focus {
+    outline: none;
+    border: 1px solid #8A2BE2;
+    box-shadow: 0 0 12px rgba(138, 43, 226, 0.4) inset, 0 0 12px rgba(138, 43, 226, 0.4);
+}
+
+.input input::placeholder {
+    color: #b8b3d6;
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        display: none; 
+    }
+
+    .app-container {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+    }
+}
