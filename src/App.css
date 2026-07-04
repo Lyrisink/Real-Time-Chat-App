@@ -360,3 +360,9 @@ body {
   box-shadow: 0 0 30px rgba(138, 43, 226, 0.7);
   transform: scale(1.05);
 }
+
+#loading {
+    color: whitesmoke;
+    margin-left: 30%;
+    margin-top: 25%;
+}
