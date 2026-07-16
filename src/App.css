@@ -247,6 +247,25 @@ body {
     align-self: flex-end;
 }
 
+.message-image {
+    max-width: 260px;
+    max-height: 260px;
+    border-radius: 12px;
+    display: block;
+    object-fit: cover;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.my-message .message-image {
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    border-top-right-radius: 2px;
+}
+
+.their-message .message-image {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top-left-radius: 2px;
+}
+
 .input {
     padding: 15px 20px;
     display: flex;
@@ -284,6 +303,50 @@ body {
     background: linear-gradient(135deg, #5c7eea 0%, #9b45e8 100%);
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
     transform: scale(1.05);
+}
+
+.input .attach-btn {
+    padding: 10px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    background: transparent;
+    border: 1px solid #2a244d;
+    border-radius: 50%;
+    box-shadow: none;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input .attach-btn:hover {
+    background: rgba(138, 43, 226, 0.15);
+    border-color: #8A2BE2;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+    transform: none;
+}
+
+.input .attach-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(138, 43, 226, 0.25);
+    border-top-color: #8A2BE2;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 0.7s linear infinite;
+    box-shadow: 0 0 6px rgba(138, 43, 226, 0.4);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .input input:focus, .searchbar input:focus {

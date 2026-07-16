@@ -22,7 +22,9 @@ export default function ChatWindow({ activeContact, messages, onSend, roomId, ty
           <MessageBubble
             key={msg.id}
             type={msg.type}
+            messageType={msg.messageType}
             text={msg.text}
+            imageURL={msg.imageURL}
             time={msg.time}
           />
         ))}

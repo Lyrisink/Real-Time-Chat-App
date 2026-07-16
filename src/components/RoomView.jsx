@@ -9,23 +9,25 @@ import { ref, onValue } from "firebase/database"
 export default function RoomView() {
   const { roomId } = useParams()
   const [messages, setMessages] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [loadedRoomId, setLoadedRoomId] = useState(null)
   const [roomName, setRoomName] = useState("")
   const [typingUsers, setTypingUsers] = useState([])
 
-useEffect(() => {
-  const typingRef = ref(rtdb, `/typing/${roomId}`)
-  const unsubscribe = onValue(typingRef, (snapshot) => {
-    const data = snapshot.val() || {}
-    // data looks like: { uid1: "Piyush", uid2: false }
-    // Keep only entries that are truthy (a name string) and not yourself
-    const names = Object.entries(data)
-      .filter(([uid, value]) => value && uid !== auth.currentUser.uid)
-      .map(([, name]) => name)
-    setTypingUsers(names)
-  })
-  return unsubscribe
-}, [roomId])
+  // Derived, not stored: "loading" is true whenever the room we've
+  // finished loading messages for doesn't match the room we're viewing.
+  const loading = loadedRoomId !== roomId
+
+  useEffect(() => {
+    const typingRef = ref(rtdb, `/typing/${roomId}`)
+    const unsubscribe = onValue(typingRef, (snapshot) => {
+      const data = snapshot.val() || {}
+      const names = Object.entries(data)
+        .filter(([uid, value]) => value && uid !== auth.currentUser.uid)
+        .map(([, name]) => name)
+      setTypingUsers(names)
+    })
+    return unsubscribe
+  }, [roomId])
 
   useEffect(() => {
     getDoc(doc(db, "rooms", roomId)).then(snap => {
@@ -34,7 +36,6 @@ useEffect(() => {
   }, [roomId])
 
   useEffect(() => {
-    setLoading(true)
     const messagesRef = collection(db, "rooms", roomId, "messages")
     const q = query(messagesRef, orderBy("timestamp", "asc"))
 
@@ -44,20 +45,24 @@ useEffect(() => {
         return {
           id: doc.id,
           type: data.senderId === auth.currentUser.uid ? "my" : "their",
+          messageType: data.messageType || "text",
           text: data.text,
+          imageURL: data.imageURL,
           time: data.timestamp?.toDate().toLocaleTimeString() ?? ""
         }
       })
       setMessages(msgs)
-      setLoading(false)
+      setLoadedRoomId(roomId) // mark this room as loaded — only place loading state changes
     })
     return unsubscribe
   }, [roomId])
 
-  async function handleSend(text) {
+  async function handleSend(content, messageType = "text") {
     const messagesRef = collection(db, "rooms", roomId, "messages")
     await addDoc(messagesRef, {
-      text,
+      messageType,
+      text: messageType === "text" ? content : null,
+      imageURL: messageType === "image" ? content : null,
       senderId: auth.currentUser.uid,
       senderName: auth.currentUser.displayName,
       timestamp: serverTimestamp()
