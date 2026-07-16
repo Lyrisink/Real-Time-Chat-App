@@ -60,16 +60,15 @@ body {
 }
 
 .searchbar {
-    padding: 10px 5px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    background-color: rgba(26, 21, 46, 0.8);
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
     border-bottom: 1px solid rgba(138, 43, 226, 0.15);
     flex-shrink: 0;
 }
 
 .searchbar input {
-    width: 100%;
+    flex-grow: 1;
     padding: 10px 15px;
     border: solid 1px #2a244d;
     border-radius: 20px;
@@ -78,6 +77,24 @@ body {
     color: #ffffff;
     outline: none;
     transition: all 0.3s ease;
+}
+
+.searchbar button {
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #4169E1 0%, #8A2BE2 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    transition: all 0.2s ease;
+}
+
+.searchbar button:hover {
+    background: linear-gradient(135deg, #5c7eea 0%, #9b45e8 100%);
+    transform: scale(1.05);
 }
 
 .contacts-list {
@@ -100,6 +117,40 @@ body {
     border-left: 3px solid transparent;
     transition: all 0.3s ease;
     border-bottom-right-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.room-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.delete-room-btn {
+    background: transparent;
+    border: 1px solid rgba(220, 53, 69, 0.4);
+    color: #dc3545;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    font-size: 0.75rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+}
+
+.delete-room-btn:hover {
+    background: rgba(220, 53, 69, 0.15);
+    border-color: #dc3545;
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.4);
 }
 
 .contact:hover {
@@ -245,6 +296,14 @@ body {
     color: #b8b3d6;
 }
 
+.typing-indicator {
+    padding: 4px 20px;
+    font-size: 0.8rem;
+    color: #8A2BE2;
+    font-style: italic;
+    flex-shrink: 0;
+}
+
 @media screen and (max-width: 768px) {
     .sidebar {
         display: none;
@@ -366,3 +425,46 @@ body {
     margin-left: 30%;
     margin-top: 25%;
 }
+
+.online-users {
+    border-top: 1px solid rgba(138, 43, 226, 0.15);
+    padding: 10px 20px;
+    flex-shrink: 0;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.online-users h4 {
+    color: #6b657a;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.online-user-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    color: #b8b3d6;
+    font-size: 0.85rem;
+    list-style: none;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-dot.online {
+    background-color: #2ecc71;
+    box-shadow: 0 0 6px rgba(46, 204, 113, 0.7);
+}
+
+.status-dot.offline {
+    background-color: #4a4560;
+}
+
