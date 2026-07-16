@@ -56,7 +56,7 @@ body.light {
     --message-my-border: rgba(138, 43, 226, 0.3);
     --message-my-shadow: rgba(138, 43, 226, 0.25);
     --message-my-text: #ffffff;
-    --chat-header-bg: #ece5f7;
+    --chat-header-bg: #c197ee;
     --input-area-bg: rgba(242, 238, 250, 0.7);
     --message-input-bg: #ffffff;
     --scrollbar-thumb: #e0d9f2;
@@ -369,6 +369,16 @@ body {
     border-top-left-radius: 2px;
 }
 
+.my-message p.emoji-only,
+.their-message p.emoji-only {
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    font-size: 2.75rem;
+    line-height: 1.2;
+}
+
 .input {
     padding: 15px 20px;
     display: flex;
@@ -378,7 +388,7 @@ body {
     background-color: var(--input-area-bg);
 }
 
-.input input {
+.input > input {
     flex-grow: 1;
     padding: 10px 15px;
     border: solid 1px var(--border-color);
@@ -390,7 +400,7 @@ body {
     transition: all 0.3s ease;
 }
 
-.input button {
+.input > button {
     padding: 12px 24px;
     background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
     color: #ffffff;
@@ -402,7 +412,7 @@ body {
     transition: all 0.2s ease;
 }
 
-.input button:hover {
+.input > button:hover {
     background: linear-gradient(135deg, #5c7eea 0%, #9b45e8 100%);
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
     transform: scale(1.05);
@@ -435,6 +445,20 @@ body {
     cursor: not-allowed;
 }
 
+.emoji-wrapper {
+    position: relative;
+}
+
+.emoji-picker-wrapper {
+    position: absolute;
+    bottom: 52px;
+    left: 0;
+    z-index: 20;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
 .spinner {
     width: 16px;
     height: 16px;
@@ -452,7 +476,7 @@ body {
     }
 }
 
-.input input:focus, .searchbar input:focus {
+.input > input:focus, .searchbar input:focus {
     outline: none;
     border: 1px solid #8A2BE2;
     box-shadow: 0 0 12px rgba(138, 43, 226, 0.4) inset, 0 0 12px rgba(138, 43, 226, 0.4);
