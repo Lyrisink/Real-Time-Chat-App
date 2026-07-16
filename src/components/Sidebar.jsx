@@ -80,7 +80,11 @@ useEffect(() => {
         <h3>{user.displayName}</h3>
       </div>
 
-      <h2>Chat-App</h2>
+      <div className="app-brand">
+        <img src="/logo-dark-nobg.png" alt="Aurora" className="brand-logo brand-logo-dark" />
+        <img src="/logo-light-nobg.png" alt="Aurora" className="brand-logo brand-logo-light" />
+        <span className="brand-name">Aurora</span>
+      </div>
 
       <div className="searchbar new-room-bar">
         <input
