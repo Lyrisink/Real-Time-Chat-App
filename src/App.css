@@ -229,6 +229,144 @@ body.light .brand-logo-light {
     transform: scale(1.05);
 }
 
+.create-room-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.create-room-wrapper > button {
+    padding: 10px 16px;
+    background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    transition: all 0.2s ease;
+}
+
+.create-room-wrapper > button:hover {
+    background: linear-gradient(135deg, #5c7eea 0%, #9b45e8 100%);
+    transform: scale(1.05);
+}
+
+.create-room-popover {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 220px;
+    padding: 14px;
+    background: var(--sidebar-list-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.create-room-popover input {
+    padding: 9px 13px;
+    border: solid 1px var(--border-color);
+    border-radius: 16px;
+    font-size: 0.9rem;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.create-room-popover input:focus {
+    border: 1px solid #8A2BE2;
+    box-shadow: 0 0 12px rgba(138, 43, 226, 0.4) inset, 0 0 12px rgba(138, 43, 226, 0.4);
+}
+
+.member-picker {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.member-picker-label {
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.member-checkbox-list {
+    list-style: none;
+    max-height: 120px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px 8px;
+    background: var(--input-bg);
+}
+
+.member-checkbox-item {
+    width: 100%;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.member-checkbox-item label {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 8px;
+    padding: 4px 2px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.member-checkbox-item label:hover {
+    color: var(--text-primary);
+}
+
+.member-checkbox-item input[type="checkbox"] {
+    accent-color: #8A2BE2;
+    width: 14px;
+    height: 14px;
+    margin: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.popover-confirm-btn {
+    padding: 9px 16px;
+    background: linear-gradient(135deg, var(--accent-1) 0%, var(--accent-2) 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 16px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+    transition: all 0.2s ease;
+}
+
+.popover-confirm-btn:hover {
+    background: linear-gradient(135deg, #5c7eea 0%, #9b45e8 100%);
+    transform: scale(1.05);
+}
+
+.popover-confirm-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 .contacts-list {
     display: flex;
     flex-direction: column;
@@ -261,29 +399,89 @@ body.light .brand-logo-light {
     white-space: nowrap;
 }
 
-.delete-room-btn {
+.room-menu-wrapper {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.room-menu-btn {
     background: transparent;
-    border: 1px solid rgba(220, 53, 69, 0.4);
-    color: #dc3545;
+    border: 1px solid transparent;
+    color: var(--text-muted);
     border-radius: 50%;
-    width: 22px;
-    height: 22px;
-    min-width: 22px;
-    font-size: 0.75rem;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    font-size: 1rem;
     line-height: 1;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.6;
+    opacity: 0.7;
     transition: all 0.2s ease;
 }
 
-.delete-room-btn:hover {
-    background: rgba(220, 53, 69, 0.15);
-    border-color: #dc3545;
+.room-menu-btn:hover {
+    background: rgba(138, 43, 226, 0.15);
+    border-color: #8A2BE2;
+    color: var(--text-primary);
     opacity: 1;
-    box-shadow: 0 0 8px rgba(220, 53, 69, 0.4);
+}
+
+.room-menu-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 160px;
+    padding: 8px;
+    background: var(--sidebar-list-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.room-menu-item {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    text-align: left;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.room-menu-item:hover {
+    background: rgba(138, 43, 226, 0.15);
+    color: var(--text-primary);
+}
+
+.room-menu-item.danger {
+    color: #dc3545;
+}
+
+.room-menu-item.danger:hover {
+    background: rgba(220, 53, 69, 0.15);
+    color: #dc3545;
+}
+
+.add-members-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 220px;
+}
+
+.member-picker-empty {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding: 6px 2px;
 }
 
 .contact:hover {
