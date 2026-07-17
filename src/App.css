@@ -268,7 +268,7 @@ body.light .brand-logo-light {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-.create-room-popover input {
+.create-room-popover input[type="text"] {
     padding: 9px 13px;
     border: solid 1px var(--border-color);
     border-radius: 16px;
@@ -279,7 +279,7 @@ body.light .brand-logo-light {
     transition: all 0.3s ease;
 }
 
-.create-room-popover input:focus {
+.create-room-popover input[type="text"]:focus {
     border: 1px solid #8A2BE2;
     box-shadow: 0 0 12px rgba(138, 43, 226, 0.4) inset, 0 0 12px rgba(138, 43, 226, 0.4);
 }
@@ -321,7 +321,7 @@ body.light .brand-logo-light {
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    gap: 8px;
+    gap: 10px;
     padding: 4px 2px;
     font-size: 0.85rem;
     color: var(--text-secondary);
@@ -334,12 +334,37 @@ body.light .brand-logo-light {
 }
 
 .member-checkbox-item input[type="checkbox"] {
-    accent-color: #8A2BE2;
-    width: 14px;
-    height: 14px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-sizing: border-box;
+    width: 13px;
+    height: 13px;
+    min-width: 13px;
+    min-height: 13px;
+    max-width: 13px;
+    max-height: 13px;
     margin: 0;
+    padding: 0;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-color);
+    background-color: transparent;
     cursor: pointer;
     flex-shrink: 0;
+    flex-grow: 0;
+    appearance: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.member-checkbox-item input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, #6c8ef5 0%, #8A2BE2 100%);
+    border-color: #8A2BE2;
+}
+
+.member-checkbox-item input[type="checkbox"]:focus,
+.member-checkbox-item input[type="checkbox"]:focus-visible {
+    outline: none;
+    box-shadow: none;
 }
 
 .popover-confirm-btn {
