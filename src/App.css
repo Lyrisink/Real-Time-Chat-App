@@ -663,6 +663,8 @@ body.light .brand-logo-light {
     cursor: pointer;
     box-shadow: 0 0 15px rgba(138, 43, 226, 0.6);
     transition: all 0.2s ease;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .input > button:hover {
@@ -747,16 +749,71 @@ body.light .brand-logo-light {
     flex-shrink: 0;
 }
 
-@media screen and (max-width: 768px) {
-    .sidebar {
-        display: none;
-    }
+.back-to-rooms-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 0 4px;
+    flex-shrink: 0;
+}
 
+@media screen and (max-width: 768px) {
     .app-container {
         width: 100%;
         height: 100vh;
         border-radius: 0;
         border: none;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-width: 100%;
+    }
+
+    .sidebar.mobile-hidden {
+        display: none;
+    }
+
+    .chat-area {
+        display: none;
+    }
+
+    .app-container.chat-open .chat-area {
+        display: flex;
+    }
+
+    #loading {
+        display: none;
+    }
+
+    .back-to-rooms-btn {
+        display: block;
+    }
+
+    .input {
+        padding: 10px 12px;
+        gap: 6px;
+    }
+
+    .input > input {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+        min-width: 0;
+    }
+
+    .input > button {
+        padding: 10px 16px;
+        font-size: 0.85rem;
+    }
+
+    .input .attach-btn {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
     }
 }
 

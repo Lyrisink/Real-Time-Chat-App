@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react"
+import { useNavigate } from "react-router-dom"
 import MessageBubble from "./MessageBubble"
 import MessageInput from "./MessageInput"
 
 export default function ChatWindow({ activeContact, messages, onSend, roomId, typingUsers }) {
   const messageAreaRef = useRef(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (messageAreaRef.current) {
@@ -14,6 +16,9 @@ export default function ChatWindow({ activeContact, messages, onSend, roomId, ty
   return (
     <div className="chat-area">
       <div className="chat-header">
+        <button className="back-to-rooms-btn" onClick={() => navigate("/")} title="Back to rooms">
+          ←
+        </button>
         <h2>{activeContact}</h2>
       </div>
 

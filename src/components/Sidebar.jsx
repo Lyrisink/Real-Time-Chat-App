@@ -25,7 +25,7 @@ function UserStatusDot({ uid }) {
 }
 
 
-export default function Sidebar() {
+export default function Sidebar({ mobileHidden }) {
   const [rooms, setRooms] = useState([])
   const [searchQuery, setSearchQuery] = useState("")
   const [showCreatePopover, setShowCreatePopover] = useState(false)
@@ -212,7 +212,7 @@ async function handleRemoveAsMember() {
   )
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${mobileHidden ? "mobile-hidden" : ""}`}>
       <div className="user-profile">
         <img src={user.photoURL} alt="profile" />
         <h3>{user.displayName}</h3>
