@@ -12,7 +12,7 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-box">
-        <h1>Chat-App</h1>
+        <h1>Aurora</h1>
         <p>Sign in to continue</p>
         <button className="google-btn" onClick={handleLogin}>
           Sign in with Google
