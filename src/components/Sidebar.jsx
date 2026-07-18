@@ -3,9 +3,9 @@ import { useNavigate, useParams } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { signOut } from "firebase/auth"
 import { auth, db } from "../firebase"
-import { collection, onSnapshot, addDoc, serverTimestamp, deleteDoc, doc, updateDoc, arrayUnion, query, where } from "firebase/firestore"
+import { collection, onSnapshot, addDoc, serverTimestamp, deleteDoc, doc, updateDoc, arrayUnion, query, where, setDoc } from "firebase/firestore"
 import { rtdb } from "../firebase"
-import { ref, onValue } from "firebase/database"
+import { ref, onValue, set as rtdbSet } from "firebase/database"
 import { getDocs } from "firebase/firestore"
 
 
@@ -49,6 +49,7 @@ useEffect(() => {
     const users = snapshot.docs
       .map(d => ({ uid: d.id, ...d.data() }))
       .filter(u => u.uid !== user?.uid) // don't show yourself in the list
+      .filter(u => u.active !== false) // hide users who removed themselves as a member
     setAllUsers(users)
   })
 }, [user])
@@ -187,6 +188,24 @@ useEffect(() => {
     navigate("/") // if you were viewing the room you just deleted, bounce back to the room list
   }
 }
+
+async function handleRemoveAsMember() {
+    const confirmed = window.confirm(
+      "Remove yourself as a member? You won't appear in anyone's member list or be addable to new rooms until you log in again."
+    )
+    if (!confirmed) return
+
+    await setDoc(doc(db, "users", user.uid), { active: false }, { merge: true })
+    await rtdbSet(ref(rtdb, `/status/${user.uid}`), "offline")
+    await signOut(auth)
+  }
+
+  async function handleLogoutClick() {
+    const confirmed = window.confirm("Log out?")
+    if (!confirmed) return
+    await rtdbSet(ref(rtdb, `/status/${user.uid}`), "offline")
+    await signOut(auth)
+  }
 
   const filteredRooms = rooms.filter(room =>
     room.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -368,9 +387,18 @@ useEffect(() => {
         </ul>
       </div>
 
-      <button className="logout-btn" onClick={() => signOut(auth)}>
-        Logout
-      </button>
+      <div className="sidebar-footer-actions">
+        <button className="logout-btn" onClick={handleLogoutClick}>
+          Logout
+        </button>
+        <button
+          className="remove-member-btn"
+          onClick={handleRemoveAsMember}
+          title="Remove me as a member"
+        >
+          ✕
+        </button>
+      </div>
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from "react"
-import { rtdb, auth, storage } from "../firebase"
+import { rtdb, auth } from "../firebase"
 import { ref, set, onDisconnect } from "firebase/database"
-import { ref as storageRef, uploadBytes, getDownloadURL } from "firebase/storage"
 import EmojiPicker from "emoji-picker-react"
 
 export default function MessageInput({ onSend, roomId }) {
@@ -52,17 +51,26 @@ export default function MessageInput({ onSend, roomId }) {
     if (e.key === "Enter") handleSend()
   }
 
-  async function handleImagePick(e) {
+async function handleImagePick(e) {
     const file = e.target.files[0]
     if (!file) return
 
     setUploading(true)
     try {
-      const path = `chat-images/${roomId}/${Date.now()}_${file.name}`
-      const imgRef = storageRef(storage, path)
-      await uploadBytes(imgRef, file)
-      const url = await getDownloadURL(imgRef)
-      onSend(url, "image")
+      const formData = new FormData()
+      formData.append("file", file)
+      formData.append("upload_preset", import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET)
+
+      const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
+        method: "POST",
+        body: formData
+      })
+
+      if (!res.ok) throw new Error("Cloudinary upload failed")
+
+      const data = await res.json()
+      onSend(data.secure_url, "image")
     } catch (err) {
       console.error("Image upload failed:", err)
     } finally {

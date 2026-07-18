@@ -787,9 +787,16 @@ body.light .brand-logo-light {
   text-overflow: ellipsis;
 }
 
-.logout-btn {
-  margin-top: auto;
+.sidebar-footer-actions {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
   margin: 10px;
+  flex-shrink: 0;
+}
+
+.logout-btn {
+  flex: 1;
   padding: 10px;
   background: var(--sidebar-footer-bg);
   color: var(--text-muted);
@@ -798,7 +805,7 @@ body.light .brand-logo-light {
   cursor: pointer;
   font-size: 0.85rem;
   transition: all 0.3s ease;
-  flex-shrink: 0;
+  min-width: 0;
 }
 
 .logout-btn:hover {
@@ -806,6 +813,26 @@ body.light .brand-logo-light {
   color: var(--text-primary);
   border-color: #8A2BE2;
   box-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+}
+
+.remove-member-btn {
+  flex-shrink: 0;
+  width: 40px;
+  background: var(--sidebar-footer-bg);
+  color: #e05555;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.remove-member-btn:hover {
+  background: rgba(224, 85, 85, 0.15);
+  color: #ff6b6b;
+  border-color: #e05555;
+  box-shadow: 0 0 10px rgba(224, 85, 85, 0.3);
 }
 
 .login-container {

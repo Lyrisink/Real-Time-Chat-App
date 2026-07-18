@@ -1,10 +1,12 @@
-import { auth } from "../firebase";
+import { auth, db } from "../firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 
 function Login() {
   const handleLogin = async () => {
     const provider = new GoogleAuthProvider();
-    await signInWithPopup(auth, provider);
+    const result = await signInWithPopup(auth, provider);
+    await setDoc(doc(db, "users", result.user.uid), { active: true }, { merge: true });
   };
 
   return (
