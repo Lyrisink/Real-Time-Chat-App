@@ -31,6 +31,8 @@ export default function ChatWindow({ activeContact, messages, onSend, roomId, ty
             text={msg.text}
             imageURL={msg.imageURL}
             time={msg.time}
+            senderName={msg.senderName}
+            showSenderName={msg.showSenderName}
           />
         ))}
       </div>

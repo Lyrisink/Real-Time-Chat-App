@@ -40,15 +40,20 @@ export default function RoomView() {
     const q = query(messagesRef, orderBy("timestamp", "asc"))
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      const msgs = snapshot.docs.map(doc => {
+      const msgs = snapshot.docs.map((doc, index, docs) => {
         const data = doc.data()
+        const prevData = index > 0 ? docs[index - 1].data() : null
+        const isFirstInRun = !prevData || prevData.senderId !== data.senderId
+
         return {
           id: doc.id,
           type: data.senderId === auth.currentUser.uid ? "my" : "their",
           messageType: data.messageType || "text",
           text: data.text,
           imageURL: data.imageURL,
-          time: data.timestamp?.toDate().toLocaleTimeString() ?? ""
+          time: data.timestamp?.toDate().toLocaleTimeString() ?? "",
+          senderName: data.senderName,
+          showSenderName: isFirstInRun
         }
       })
       setMessages(msgs)
