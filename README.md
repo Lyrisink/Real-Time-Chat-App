@@ -71,8 +71,8 @@ Aurora was built as part of a structured 8-week full-stack learning path — sta
 
 1. Clone the repo:
    ```bash
-   git clone https://github.com/your-username/chat-app.git
-   cd chat-app
+   git clone https://github.com/Lyrisink/Real-Time-Chat-App.git
+   cd Real-Time-Chat-App
    ```
 
 2. Install dependencies:
